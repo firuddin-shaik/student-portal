@@ -1,101 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <title>ECE Student Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Portal - Firuddin Shaik</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh; display: flex; justify-content: center; align-items: center;
+    body { font-family: Arial; background: #0d1117; color: white; text-align: center; margin: 0; padding: 20px; }
+   .login-box { margin-top: 80px; }
+    input { padding: 12px; margin: 8px; width: 280px; border-radius: 8px; border: 1px solid #30363d; background: #161b22; color: white; font-size: 16px; }
+    button { padding: 12px 40px; background: #238636; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+    button:hover { background: #2ea043; }
+   .dashboard { display: none; margin-top: 40px; }
+   .profile-pic { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid #238636; }
+   .default-icon {
+      width: 130px; height: 130px; border-radius: 50%; background: #21262d;
+      color: #58a6ff; font-size: 70px; display: inline-flex;
+      align-items: center; justify-content: center; border: 4px solid #238636;
     }
-    .card {
-      background: white; padding: 40px; border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2); width: 90%; max-width: 450px;
-      text-align: center;
-    }
-    h1 { color: #333; margin-bottom: 8px; }
-    p { color: #666; margin-bottom: 24px; }
-    input {
-      width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee;
-      border-radius: 8px; font-size: 16px;
-    }
-    input:focus { border-color: #667eea; outline: none; }
-    button {
-      width: 100%; padding: 12px; background: #667eea; color: white;
-      border: none; border-radius: 8px; font-size: 16px; font-weight: 600;
-      cursor: pointer; margin-top: 16px;
-    }
-    button:hover { background: #5a6fd8; }
-    .dashboard { display: none; text-align: left; }
-    .profile { text-align: center; margin-bottom: 24px; }
-      .avatar {
-     width: 80px; height: 80px; border-radius: 50%;
-     margin: 0 auto 12px; object-fit: cover; border: 3px solid #667eea;
-   }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
-    th { background: #f8f9fa; }
-    .logout { background: #dc3545; margin-top: 8px; }
-    .logout:hover { background: #c82333; }
-    .error { color: #dc3545; margin-top: 8px; font-size: 14px; display: none; }
+   .card { background: #161b22; padding: 20px; margin: 15px auto; width: 320px; border-radius: 12px; border: 1px solid #30363d; }
+    h1 { color: #58a6ff; }
+    h2 { margin: 20px 0; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <!-- Login Form -->
-    <div id="loginForm">
-      <h1>Student Portal</h1>
-      <p>Developed by Firuddin Shaik<br>ECE Student | Future Developer</p>
-      <input type="text" id="username" placeholder="Username" value="firuddin">
-      <input type="password" id="password" placeholder="Password" value="1234">
-      <button onclick="login()">Login</button>
-      <p class="error" id="errorMsg">Invalid username or password</p>
-      <p style="font-size: 12px; margin-top: 16px; color: #999;">Demo: firuddin / 1234</p>
-    </div>
 
-    <!-- Dashboard -->
-    <div class="dashboard" id="dashboard">
-      <div class="profile">
-        
-          <img src="profile.jpg" class="avatar" alt="Firuddin">
-        <p>Roll No: 222G1A04A8 | ECE - final Year</p>
-      </div>
-      
-      <h3>Semester Marks</h3>
-      <table>
-        <tr><th>Subject</th><th>Marks</th><th>Grade</th></tr>
-          <tr><td>VLSI Design</td><td>95</td><td>O</td></tr>
-   <tr><td>Antennas</td><td>88</td><td>A+</td></tr>
-   <tr><td>Digital Communication</td><td>91</td><td>A+</td></tr>
-      </table>
-
-        <h3>Attendance: 92%</h3>
-      <button class="logout" onclick="logout()">Logout</button>
-    </div>
+  <!-- LOGIN PAGE -->
+  <div class="login-box" id="loginPage">
+    <h1>🎓 ECE Student Portal</h1>
+    <p>Login to view your results</p>
+    <input type="text" id="rollInput" placeholder="Roll Number"><br>
+    <input type="password" id="passInput" placeholder="Common Password"><br>
+    <button onclick="login()">Login</button>
+    <p id="error" style="color: #f85149; margin-top: 15px;"></p>
   </div>
 
-  <script>
-    function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-      
-      if(user === 'firuddin' && pass === '1234') {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('errorMsg').style.display = 'none';
-      } else {
-        document.getElementById('errorMsg').style.display = 'block';
-      }
-    }
-    
-    function logout() {
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('dashboard').style.display = 'none';
-      document.getElementById('username').value = 'firuddin';
-      document.getElementById('password').value = '1234';
-    }
-  </script>
+  <!-- DASHBOARD PAGE -->
+  <div class="dashboard" id="dashboardPage">
+    <div id="profileArea"></div>
+    <h2 id="studentName"></h2>
+    <div class="card"> <b>📚 Sem 1 CGPA:</b> <span id="sem1"></span> </div>
+    <div class="card"> <b>📚 Sem 2 CGPA:</b> <span id="sem2"></span> </div>
+    <div class="card"> <b>📊 Attendance:</b> <span id="att"></span>% </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+<script>
+// ====== CONFIG START ======
+const COMMON_PASSWORD = "fairu23"; // Ikkada nee istam vachina password pettu
+
+const studentsData = {
+  "222G1A04A8": { name: "Firuddin", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04A8.jpeg" },
+  "222G1A0460": { name: "HEMANTH", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0460.jpeg" },
+  "222G1A0461": { name: "PRANITHA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0461.jpeg" },
+  "222G1A0496": { name: "BHAVANA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0496.jpeg" },
+  "222G1A0475": { name: "HARSHA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0475.jpeg" },
+  "222G1A0498": { name: "USMAN", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0498.jpeg" },
+  "222G1A04B6": { name: "SHAKEER", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04B6.jpeg" },
+  "222G1A04B1": { name: "KULLAYAPPA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04B1.jpeg" },
+  "222G1A04A2": { name: "MOSI", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04A2.jpeg" },
+  "222G1A0483": { name: "ANU", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0483.jpeg" },
+  "222G1A0482": { name: "YERRI SWAMY", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0482.jpeg" },
+  "222G1A0470": { name: "TAAHU", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0470.jpeg" },
+  "222G1A0452": { name: "NAZIYA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0452.jpeg" },
+  "222G1A04G5": { name: "ARSHAD", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04G5.jpeg" },
+  "222G1A04G7": { name: "RAHAMTULLA", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04G7.jpeg" },
+  "222G1A04F7": { name: "BHARANI", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A04F7.jpeg" },
+  "222G1A0488": { name: "AJAY", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0488.jpeg" },
+  "222G1A0476": { name: "SIRI", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0476.jpeg" },
+  "222G1A0491": { name: "SUMATHI", sem1: 8.5, sem2: 8.8, att: 92, photo: "images/222G1A0491.jpeg" },
+};
+// ====== CONFIG END ======
+
+function login() {
+  const roll = document.getElementById("rollInput").value.trim().toUpperCase();
+  const pass = document.getElementById("passInput").value;
+  const error = document.getElementById("error");
+
+  if (pass!== COMMON_PASSWORD) {
+    error.innerText = "Wrong Password!";
+    return;
+  }
+  if (!studentsData[roll]) {
+    error.innerText = "Roll Number not found!";
+    return;
+  }
+
+  const student = studentsData[roll];
+  error.innerText = "";
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("dashboardPage").style.display = "block";
+
+  const profileHTML = student.photo
+   ? `<img src="${student.photo}" class="profile-pic" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+       <div class="default-icon" style="display:none;">👤</div>`
+    : `<div class="default-icon">👤</div>`;
+
+  document.getElementById("profileArea").innerHTML = profileHTML;
+  document.getElementById("studentName").innerText = student.name;
+  document.getElementById("sem1").innerText = student.sem1;
+  document.getElementById("sem2").innerText = student.sem2;
+  document.getElementById("att").innerText = student.att;
+}
+
+function logout() {
+  document.getElementById("loginPage").style.display = "block";
+  document.getElementById("dashboardPage").style.display = "none";
+  document.getElementById("rollInput").value = "";
+  document.getElementById("passInput").value = "";
+}
+</script>
+
 </body>
 </html>
