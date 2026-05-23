@@ -1,23 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Portal - Firuddin</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal - Firuddin Shaik</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .card { background: white; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    h1 { color: #333; margin-bottom: 10px; }
-    p { color: #666; margin: 5px 0; }
-    button { margin-top: 20px; padding: 12px 30px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
-    button:hover { background: #5568d3; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh; display: flex; justify-content: center; align-items: center;
+    }
+    .card {
+      background: white; padding: 40px; border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2); width: 90%; max-width: 450px;
+      text-align: center;
+    }
+    h1 { color: #333; margin-bottom: 8px; }
+    p { color: #666; margin-bottom: 24px; }
+    input {
+      width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee;
+      border-radius: 8px; font-size: 16px;
+    }
+    input:focus { border-color: #667eea; outline: none; }
+    button {
+      width: 100%; padding: 12px; background: #667eea; color: white;
+      border: none; border-radius: 8px; font-size: 16px; font-weight: 600;
+      cursor: pointer; margin-top: 16px;
+    }
+    button:hover { background: #5a6fd8; }
+    .dashboard { display: none; text-align: left; }
+    .profile { text-align: center; margin-bottom: 24px; }
+    .avatar {
+      width: 80px; height: 80px; background: #667eea; border-radius: 50%;
+      margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 32px; font-weight: bold;
+    }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f8f9fa; }
+    .logout { background: #dc3545; margin-top: 8px; }
+    .logout:hover { background: #c82333; }
+    .error { color: #dc3545; margin-top: 8px; font-size: 14px; display: none; }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Student Portal</h1>
-    <p><b>Developed by Firuddin Shaik</b></p>
-    <p>ECE Student | Future Developer</p>
-    <button onclick="alert('Welcome to my portal mawa! 🔥')">Login Demo</button>
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h1>Student Portal</h1>
+      <p>Developed by Firuddin Shaik<br>ECE Student | Future Developer</p>
+      <input type="text" id="username" placeholder="Username" value="firuddin">
+      <input type="password" id="password" placeholder="Password" value="1234">
+      <button onclick="login()">Login</button>
+      <p class="error" id="errorMsg">Invalid username or password</p>
+      <p style="font-size: 12px; margin-top: 16px; color: #999;">Demo: firuddin / 1234</p>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+      <div class="profile">
+        <div class="avatar">FS</div>
+        <h2>Firuddin Shaik</h2>
+        <p>Roll No: 22ECE01 | ECE - 3rd Year</p>
+      </div>
+      
+      <h3>Semester Marks</h3>
+      <table>
+        <tr><th>Subject</th><th>Marks</th><th>Grade</th></tr>
+        <tr><td>Digital Electronics</td><td>89</td><td>A</td></tr>
+        <tr><td>Signals & Systems</td><td>92</td><td>A+</td></tr>
+        <tr><td>Microprocessors</td><td>85</td><td>A</td></tr>
+      </table>
+
+      <h3>Attendance: 87%</h3>
+      <button class="logout" onclick="logout()">Logout</button>
+    </div>
   </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      
+      if(user === 'firuddin' && pass === '1234') {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('errorMsg').style.display = 'none';
+      } else {
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+    }
+    
+    function logout() {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('username').value = 'firuddin';
+      document.getElementById('password').value = '1234';
+    }
+  </script>
 </body>
 </html>
